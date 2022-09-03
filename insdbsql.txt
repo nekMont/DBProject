@@ -1,0 +1,22 @@
+insert into Video
+    values(24, 4);
+insert into Video
+    values(66, 2);
+insert into Video
+    values(124, 400);
+
+insert into Model
+    values('12-BF5', 123.33, 124.44, 12.45, 134.44, 13.5);
+insert into Model
+    values('12-FXS', 123.33, 124.44, 12.45, 134.44, 13.5);
+insert into Model
+    values('12-NekMon', 123.33, 124.44, 12.45, 134.44, 13.5);
+insert into Model
+    values('12-AleFLor', 123.33, 124.44, 12.45, 134.44, 13.5);
+
+insert into Site
+    values(125, 'bar', '44 East Peninsula Street Chevy Chase, MD 20815', '915-746-1234');
+insert into Site
+    values(132, 'restaurant', '5 Taylor St. Tampa, FL 33604', '915-746-1324');
+insert into Site
+    values(505, 'bar', '224 West Bayport Lane Fullerton, CA 92831', '915-746-4321');
