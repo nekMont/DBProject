@@ -100,10 +100,10 @@ def question8():
 questionNumber = str(sys.argv[1])
 questionParam = ""
 
+#pulls second argument after question number
 if (len(sys.argv) > 2):
-    questionParam = str(sys.argv[2])
-
-if (len(sys.argv) > 3):
-    print("Too many parameters given")
-else:
-    main(questionNumber, questionParam)
+    for i in range(len(sys.argv)):
+        if i > 1:
+            questionParam+=sys.argv[i]+" "
+    
+main(questionNumber, questionParam)
