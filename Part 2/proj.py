@@ -1,4 +1,13 @@
+import mysql.connector
 import sys
+
+#connects to the sql database
+mydb = mysql.connector.connect(
+host="localhost",
+user="dbuser",
+password="Iwilldowell",
+database="cs482502"
+)
 
 #Takes qeustion number to be solved as a parameter and calls appropriate function to solve the question
 def main(num):
