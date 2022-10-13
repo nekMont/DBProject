@@ -12,31 +12,43 @@ database="cs482502"
 #Takes qeustion number to be solved as a parameter and calls appropriate function to solve the question
 def main(num, ques):
     if(num == '1'):
-        question1(ques)
+        if (ques == ""):
+            print("A further parameter is needed for this question")
+        else:
+            question1(ques)
     elif(num == '2'):
-        question2(ques)
+        if (ques == ""):
+            print("A further parameter is needed for this question")
+        else:
+            question2(ques)
     elif(num == '3'):
         if (ques != ""):
-            print("No further parameters needed for this question")
+            print("No further parameter needed for this question")
         else:
             question3()
     elif(num == '4'):
-        question4(ques)
+        if (ques == ""):
+            print("A further parameter is needed for this question")
+        else:
+            question4(ques)
     elif(num == '5'):
         if (ques != ""):
-            print("No further parameters needed for this question")
+            print("No further parameter needed for this question")
         else:
             question5()
     elif(num == '6'):
-        question6(ques)
+        if (ques == ""):
+            print("A further parameter is needed for this question")
+        else:
+            question6(ques)
     elif(num == '7'):
         if (ques != ""):
-            print("No further parameters needed for this question")
+            print("No further parameter needed for this question")
         else:
             question7()
     elif(num == '8'):
         if (ques != ""):
-            print("No further parameters needed for this question")
+            print("No further parameter needed for this question")
         else:
             question8()
     else:
@@ -91,4 +103,7 @@ questionParam = ""
 if (len(sys.argv) > 2):
     questionParam = str(sys.argv[2])
 
-main(questionNumber, questionParam)
+if (len(sys.argv) > 3):
+    print("Too many parameters given")
+else:
+    main(questionNumber, questionParam)
