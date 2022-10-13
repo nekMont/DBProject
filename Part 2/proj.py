@@ -10,34 +10,46 @@ database="cs482502"
 )
 
 #Takes qeustion number to be solved as a parameter and calls appropriate function to solve the question
-def main(num):
+def main(num, ques):
     if(num == '1'):
-        question1()
+        question1(ques)
     elif(num == '2'):
-        question2()
+        question2(ques)
     elif(num == '3'):
-        question3()
+        if (ques != ""):
+            print("No further parameters needed for this question")
+        else:
+            question3()
     elif(num == '4'):
-        question4()
+        question4(ques)
     elif(num == '5'):
-        question5()
+        if (ques != ""):
+            print("No further parameters needed for this question")
+        else:
+            question5()
     elif(num == '6'):
-        question6()
+        question6(ques)
     elif(num == '7'):
-        question7()
+        if (ques != ""):
+            print("No further parameters needed for this question")
+        else:
+            question7()
     elif(num == '8'):
-        question8()
+        if (ques != ""):
+            print("No further parameters needed for this question")
+        else:
+            question8()
     else:
         print("Invalid question number provided, must be 1-8")
 
 
 #solves question 1
-def question1():
+def question1(streetName):
     print('1')
 
 
 #solves question 2
-def question2():
+def question2(SchedSystem):
     print('2')
 
 
@@ -47,7 +59,7 @@ def question3():
 
 
 #solves question 4
-def question4():
+def question4(PhoneNo):
     print('4')
 
 
@@ -57,7 +69,7 @@ def question5():
 
 
 #solves question 6
-def question6():
+def question6(ModelNo):
     print('6')
 
 
@@ -72,6 +84,11 @@ def question8():
 
 
 
-#pulls argument and calls main
+#pulls arguments and calls main
 questionNumber = str(sys.argv[1])
-main(questionNumber)
+questionParam = ""
+
+if (len(sys.argv) > 2):
+    questionParam = str(sys.argv[2])
+
+main(questionNumber, questionParam)
