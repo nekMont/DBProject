@@ -1,3 +1,4 @@
+/* 1 */
 create table Video
     (videoCode   int,
      videoLength int, 
@@ -10,7 +11,7 @@ insert into Video
 insert into Video
     values(124, 400);
 
-
+/* 2 */
 create table Model
     (modelNo    char(10), 
      width      numeric(6,2),
@@ -29,7 +30,7 @@ insert into Model
 insert into Model
     values('12-AleFLor', 123.33, 124.44, 12.45, 134.44, 13.5);
 
-
+/* 3 */
 create table Site
     (siteCode   int,
      type       varchar(16), 
@@ -45,13 +46,13 @@ insert into Site
 insert into Site
     values(505, 'bar', '224 West Bayport Lane Fullerton, CA 92831', '915-676-4321');
 
-
+/* 4 */
 create table DigitalDisplay
     (serialNo           char(10),
      schedulerSystem    char(10),
      modelNo            char(10),
      primary key (serialNo),
-     foreign key (modelNo) references Model(modelNo),
+     foreign key (modelNo) references Model(modelNo) On Delete cascade On Update cascade, 
      check (schedulerSystem in ('Random', 'Smart', 'Virtue')));
 
 insert into DigitalDisplay 
@@ -63,7 +64,7 @@ insert into DigitalDisplay
 insert into DigitalDisplay 
     values('4CFO146A0A', 'Virtue', '12-NekMon');
 
-
+/* 5 */
 create table Client
     (clientID   int,
      name       varchar(40),
@@ -78,7 +79,7 @@ insert into Client
 insert into Client 
     values(122, 'Frank Woods', '614-644-5362', '49 Leatherwood St. Melbourne, FL 32904');
 
-
+/* 6 */
 create table TechnicalSupport
     (empID  int,
      name   varchar(40),
@@ -96,7 +97,7 @@ insert into TechnicalSupport
 insert into TechnicalSupport 
     values(4556, 'Frank Sea', 'M');
 
-
+/* 7 */
 create table Administrator
     (empID  int, 
      name   varchar(40),
@@ -110,7 +111,7 @@ insert into Administrator
 insert into Administrator 
     values(253, 'Jonathan Joestar', 'M');
      
-
+/* 8 */
 create table Salesman
     (empID  int,
      name   varchar(40),
@@ -126,7 +127,7 @@ insert into Salesman
 insert into Salesman 
     values(2234, 'Isabella Hendrix', 'F');
 
-
+/* 9 */
 create table AirtimePackage
     (packageID   int,
      class       varchar(16),
@@ -144,13 +145,13 @@ insert into AirtimePackage
 insert into AirtimePackage 
     values(9884, 'golden hours', '2022-08-01', '2023-09-01', 96, 48767);
 
-
+/* 10 */
 create table AdmWorkHours
     (empID   int,
      day     date,
      hours   numeric(4,2),
      primary key (empID),
-     foreign key (empID) references Administrator(empID));
+     foreign key (empID) references Administrator(empID) On Delete cascade On Update cascade);
 
 insert into AdmWorkHours 
     values(134, '2022-09-05', 6.5);
@@ -159,13 +160,13 @@ insert into AdmWorkHours
 insert into AdmWorkHours 
     values(253, '2022-09-07', 8.0);
 
-
+/* 11 */
 create table Broadcasts
     (videoCode  int,
      siteCode   int,
      primary key (videoCode, siteCode),
-     foreign key (videoCode) references Video(videoCode),
-     foreign key (siteCode) references Site(siteCode));
+     foreign key (videoCode) references Video(videoCode) On Delete cascade On Update cascade,
+     foreign key (siteCode) references Site(siteCode) On Delete cascade On Update cascade);
 
 insert into Broadcasts 
     values(24, 125);
@@ -174,13 +175,13 @@ insert into Broadcasts
 insert into Broadcasts 
     values(124, 505);
 
-
+/* 12 */
 create table Administers
     (empID      int,
      siteCode   int,
      primary key (empID, siteCode),
-     foreign key (empID) references Administrator(empID),
-     foreign key (siteCode) references Site(siteCode));
+     foreign key (empID) references Administrator(empID) On Delete cascade On Update cascade,
+     foreign key (siteCode) references Site(siteCode) On Delete cascade On Update cascade);
 
 insert into Administers 
     values(134, 132);
@@ -189,13 +190,13 @@ insert into Administers
 insert into Administers 
     values(253, 125);
 
-
+/* 13 */
 create table Specializes
     (empID      int,
      modelNo    char(10),
      primary key (empID, modelNo),
-     foreign key (empID) references TechnicalSupport(empID),
-     foreign key (modelNo) references Model(modelNo));
+     foreign key (empID) references TechnicalSupport(empID) On Delete cascade On Update cascade,
+     foreign key (modelNo) references Model(modelNo) On Delete cascade On Update cascade);
 
 insert into Specializes 
     values(2335, '12-BF5');
@@ -208,16 +209,16 @@ insert into Specializes
 insert into Specializes 
     values(1244, '12-AleFLor');
     
-
+/* 14 */
 create table Purchases
     (clientID       int,
      empID          int,
      packageID      int,
      comissionRate  numeric(4,2),
      primary key (clientID, empID, packageID),
-     foreign key (clientID) references Client(clientID),
-     foreign key (empID) references Salesman(empID),
-     foreign key (packageID) references AirtimePackage(packageID));
+     foreign key (clientID) references Client(clientID) On Delete cascade On Update cascade,
+     foreign key (empID) references Salesman(empID) On Delete cascade On Update cascade,
+     foreign key (packageID) references AirtimePackage(packageID) On Delete cascade On Update cascade);
 
 insert into Purchases 
     values(44, 2352, 8752, .10);
@@ -226,13 +227,13 @@ insert into Purchases
 insert into Purchases 
     values(122, 2234, 9884, .08);
 
-
+/* 15 */
 create table Locates
     (serialNo   char(10),
      siteCode   int,
      primary key (serialNo, siteCode),
-     foreign key (serialNo) references DigitalDisplay(serialNo),
-     foreign key (siteCode) references Site(siteCode));
+     foreign key (serialNo) references DigitalDisplay(serialNo) On Delete cascade On Update cascade,
+     foreign key (siteCode) references Site(siteCode) On Delete cascade On Update cascade);
      
 insert into Locates 
     values('4CEO0460D0', 125);
