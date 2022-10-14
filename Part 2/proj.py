@@ -146,17 +146,67 @@ def question4(PhoneNo):
 
 #solves question 5
 def question5():
-    print('5')
+    mycursor = mydb.cursor(buffered = True)
+    sql = "select amd.empId, amd.name, admW.hours\
+       from AdmWorkHours as admW, Administrator as amd\
+       where amd.empId = admW.empId\
+       order by hours asc;"
+       
+    mycursor.execute(sql)
+    myresult = mycursor.fetchall()
+
+    print("empID\t empNames\t\t total_working_hours")
+    print("----------------------------------------------")
+
+    for x in myresult:
+        print(x[0], "\t\t", x[1], "\t\t", x[2])
+        
+    print()
 
 
 #solves question 6
 def question6(ModelNo):
-    print('6')
+    mycursor = mydb.cursor(buffered = True)
+    userModelNo = sys.argv[1]
+    print()
+
+    sql = "select name\
+        from TechnicalSupport as ts, Specializes as s\
+        where s.modelNo = %s and ts.empID = s.empID;"
+        
+    val = (userModelNo,)
+
+    mycursor.execute(sql, val)
+
+    myresult = mycursor.fetchall()
+
+    print("Name")
+    print("--------------")
+    for x in myresult:
+        if not x:
+            print("No result")
+        else:
+            print(x[0])
+    print()
 
 
 #solves question 7
 def question7():
-    print('7')
+    mycursor = mydb.cursor(buffered = True)
+    sql = "select s.name, avg(p.comissionRate) as avg\
+       from Salesman as s, Purchases as p\
+       where s.empID = p.empID\
+       group by s.name;"
+       
+    mycursor.execute(sql)
+
+    myresult = mycursor.fetchall()
+
+    print("Name\t\tAvgComissionRate")
+    print("--------------")
+    for x in myresult:
+        print(x[0], "\t\t", x[1])
+    print()
 
 
 #solves question 8
