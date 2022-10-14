@@ -167,7 +167,7 @@ def question5():
 #solves question 6
 def question6(ModelNo):
     mycursor = mydb.cursor(buffered = True)
-    userModelNo = sys.argv[1]
+    userModelNo = sys.argv[2]
     print()
 
     sql = "select name\
