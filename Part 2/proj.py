@@ -57,12 +57,22 @@ def main(num, ques):
 
 #solves question 1
 def question1(streetName):
-    print('1')
+    mycursor = mydb.cursor()
+    query="SELECT * FROM SITE WHERE ADDRESS LIKE '%"+streetName+"%'"
+    mycursor.execute(query)
+
+    for x in mycursor:
+        print(x)
 
 
 #solves question 2
 def question2(SchedSystem):
-    print('2')
+    mycursor = mydb.cursor()
+    query="SELECT * FROM DIGITALDISPLAY WHERE SCHEDULERSYSTEM='"+SchedSystem+"'"
+    mycursor.execute(query)
+
+    for x in mycursor:
+        print(x)
 
 
 #solves question 3
@@ -104,6 +114,9 @@ questionParam = ""
 if (len(sys.argv) > 2):
     for i in range(len(sys.argv)):
         if i > 1:
-            questionParam+=sys.argv[i]+" "
+            if (i != len(sys.argv)-1):
+                questionParam+=sys.argv[i]+" "
+            else:
+                questionParam+=sys.argv[i]
     
 main(questionNumber, questionParam)
