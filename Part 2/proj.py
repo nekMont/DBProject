@@ -9,6 +9,7 @@ password="Iwilldowell",
 database="cs482502"
 )
 
+
 #Takes qeustion number to be solved as a parameter and calls appropriate function to solve the question
 def main(num, ques):
     if(num == '1'):
@@ -77,7 +78,65 @@ def question2(SchedSystem):
 
 #solves question 3
 def question3():
-    print('3')
+    #arrays to keep track of names, and repeating names pulled from the database
+    names=[]
+    namesRepeat=[]
+    #bool to keep track of needed spacing
+    spacing=False
+
+    #query to pull names from salesman table
+    mycursor = mydb.cursor()
+    query="SELECT NAME FROM SALESMAN"
+    mycursor.execute(query)
+
+    #assigns names from DB to arrays
+    for x in mycursor:
+        #stringifies each name
+        name=str(x)
+
+        #splices string to get rid of parenthesis and commas
+        name=name[2:len(name)-3]
+
+        #appends names to appropriate arrays
+        if name not in names:
+            names.append(name)
+        else:
+            namesRepeat.append(name)
+
+    
+    print("{:<16} {:<4}".format('Names', 'cnt'))
+    print('---------------------')
+
+    #loops through names printing as it goes
+    for i in names:
+        #checks to see if name repeats
+        if i in namesRepeat:
+            #pulls all versions of the repeated name from the DB
+            query="SELECT * FROM SALESMAN WHERE NAME='"+i+"'"
+            mycursor.execute(query)
+
+            #keeps track of how many times a name repeats
+            n=1
+
+            #finds out how many times a name is repeated
+            for j in namesRepeat:
+                if j == i:
+                    n+=1
+
+            #prints name and its repeat count
+            print("{:<16} {:<4}".format(i, n),end='')
+
+            #prints all the versions of the name
+            for x in mycursor:
+                if n!=1:
+                    print(x, end=',')
+                    n-=1
+                else:
+                    print(x)
+        else:
+            #prints non repeating names
+            print("{:<16} {:<8}".format(i, '1'))
+
 
 
 #solves question 4
