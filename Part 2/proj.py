@@ -182,6 +182,8 @@ def question6(ModelNo):
 
     print("Name")
     print("--------------")
+    if len(myresult) == 0:
+        print("No Results Found...")
     for x in myresult:
         if not x:
             print("No result")
@@ -229,3 +231,8 @@ if (len(sys.argv) > 2):
                 questionParam+=sys.argv[i]
     
 main(questionNumber, questionParam)
+
+if(mydb.is_connected()):
+    mydb.close()
+    #mycursor.close()
+    print("MySQL connection is closed")
