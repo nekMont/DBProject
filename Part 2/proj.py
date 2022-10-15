@@ -62,18 +62,66 @@ def question1(streetName):
     query="SELECT * FROM SITE WHERE ADDRESS LIKE '%"+streetName+"%'"
     mycursor.execute(query)
 
-    for x in mycursor:
-        print(x)
+    myresult = mycursor.fetchall()
+
+    if (len(myresult) != 0):
+        print("{:<16} {:<15} {:50} {:10}".format('Site Code', 'Type', 'Address', 'Phone Number'))
+        print("------------------------------------------------------------------------------------------------------------")
+
+        for x in myresult:
+            print("{:<16} {:<15} {:50} {:10}".format(x[0], x[1], x[2], x[3]))
+    else:
+        print("No Results Found...")
+    print()
 
 
 #solves question 2
 def question2(SchedSystem):
+    models=[]
+    
     mycursor = mydb.cursor()
     query="SELECT * FROM DIGITALDISPLAY WHERE SCHEDULERSYSTEM='"+SchedSystem+"'"
     mycursor.execute(query)
 
-    for x in mycursor:
-        print(x)
+    myresult = mycursor.fetchall()
+
+    if (len(myresult) != 0):
+        print("{:<16} {:<15}".format('Serial Number', 'Model Number'))
+        print("--------------------------------")
+
+        for x in myresult:
+            print("{:<16} {:<15}".format(x[0], x[2]))
+
+            if (x[2] not in models):
+                models.append(x[2])
+        
+        print()
+
+        print("{:<15} {:<15}".format('Model Number', 'Available Tech Support Employees'))
+        print("--------------------------------------------------")
+
+        for x in models:
+            query="SELECT EMPID FROM SPECIALIZES WHERE MODELNO='"+x+"'"
+            mycursor.execute(query)
+            myresult = mycursor.fetchall()
+            
+            temp=str(myresult[0])
+            temp=temp[1:len(temp)-2]
+            
+            print("{:<16}".format(x), end='')
+            
+            query="SELECT NAME FROM TECHNICALSUPPORT WHERE EMPID='"+temp+"'"
+            mycursor.execute(query)
+            myresult = mycursor.fetchall()
+            for i in myresult:
+                print(i[0], end=',')
+            print()
+
+        print()
+        
+    else:
+        print("No Results Found...")
+    print()
 
 
 #solves question 3
