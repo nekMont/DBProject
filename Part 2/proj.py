@@ -189,8 +189,21 @@ def question3():
 
 #solves question 4
 def question4(PhoneNo):
-    print('4')
+    num = input("enter client number: ")
 
+    sql = ("select * \
+        from Client \
+        where phone = %s;")
+
+    val = (num,)
+
+    mycursor.execute(sql, val)
+    myresult =  mycursor.fetchall()
+
+    if(len(myresult) == 0): 
+        print("No result found...")
+    for x in myresult: 
+        print(x)
 
 #solves question 5
 def question5():
@@ -261,7 +274,17 @@ def question7():
 
 #solves question 8
 def question8():
-    print('8')
+    adminCnt = mycursor.execute("SELECT count(empID) FROM proj_1.Administor;")
+
+    Salesmen = mycursor.execute("SELECT count(empID) FROM proj_1.Salesman;")
+
+    Technicians = mycursor.execute("SELECT count(empID) FROM proj_1.TechnicialSupport;")
+
+    print("Role                    cnt")
+    print("------------------")
+    print("Administrator:         ", adminCnt)
+    print("Salesman:         ", Salesmen)
+    print("Technicians:         ",Technicians) 
 
 
 
